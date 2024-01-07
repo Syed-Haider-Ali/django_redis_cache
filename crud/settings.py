@@ -53,10 +53,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# INTERNAL_IPS = [
-#     "127.0.0.1",
-# ]
-
 ROOT_URLCONF = 'crud.urls'
 
 TEMPLATES = [
@@ -106,6 +102,19 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+###################### Redis Cache #######################
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+###################### ########### #######################
 
 
 # Internationalization
