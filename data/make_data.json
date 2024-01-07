@@ -1,0 +1,65 @@
+[
+    {
+        "model": "vechile.make",
+        "pk": 1,
+        "fields": {
+            "created_at": "2023-07-31T19:10:22.985Z",
+            "updated_at": "2023-07-31T19:10:22.985Z",
+            "name": "Honda"
+        }
+    },
+    {
+        "model": "vechile.make",
+        "pk": 3,
+        "fields": {
+            "created_at": "2023-08-03T05:58:20.027Z",
+            "updated_at": "2023-08-03T05:58:20.027Z",
+            "name": "BMW"
+        }
+    },
+    {
+        "model": "vechile.make",
+        "pk": 4,
+        "fields": {
+            "created_at": "2023-08-03T10:11:22.413Z",
+            "updated_at": "2023-08-03T10:11:22.413Z",
+            "name": "Umar"
+        }
+    },
+    {
+        "model": "vechile.make",
+        "pk": 5,
+        "fields": {
+            "created_at": "2023-08-03T10:12:25.784Z",
+            "updated_at": "2023-08-03T10:12:25.784Z",
+            "name": "Umar"
+        }
+    },
+    {
+        "model": "vechile.make",
+        "pk": 6,
+        "fields": {
+            "created_at": "2023-08-03T10:17:06.200Z",
+            "updated_at": "2023-08-03T10:17:06.200Z",
+            "name": "VolksVagon"
+        }
+    },
+    {
+        "model": "vechile.make",
+        "pk": 7,
+        "fields": {
+            "created_at": "2023-08-10T12:57:04.591Z",
+            "updated_at": "2023-08-10T12:57:04.591Z",
+            "name": "Honda"
+        }
+    },
+    {
+        "model": "vechile.make",
+        "pk": 8,
+        "fields": {
+            "created_at": "2023-08-10T12:57:14.130Z",
+            "updated_at": "2023-08-10T12:57:14.130Z",
+            "name": "Suzuki"
+        }
+    }
+]
