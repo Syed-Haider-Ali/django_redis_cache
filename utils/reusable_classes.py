@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.cache import cache
 from utils.reusable_methods import create_response, paginate_data
 from utils.response_messages import *
 from utils.reusable_methods import get_first_error_message
@@ -17,6 +17,7 @@ class BaseAPIController:
     serializer_class = ""
     filterset_class = ""
     feature_name = ""
+    cache_key = ""
     
     def post(self,request):
         serialized_data = self.serializer_class(data=request.data)
@@ -28,20 +29,18 @@ class BaseAPIController:
             return create_response({},get_first_error_message(serialized_data.errors,UNSUCCESSFUL), 400)
         
     def get(self,request):
-        instances = self.serializer_class.Meta.model.objects.all()
-        
-        filtered_data = self.filterset_class(request.GET, queryset=instances)
-        data = filtered_data.qs
-        
-        if not data:   
-            return create_response({}, NO_RECORD, 200)
-        paginated_data = paginate_data(data, request)
-        count = data.count()
-        
-        serialized_data = self.serializer_class(paginated_data, many=True).data
+        if cache.get(self.cache_key):
+            response = cache.get(self.cache_key)
+            db= 'redis'
+        else:
+            response = self.serializer_class.Meta.model.objects.all().order_by('-created_at')
+            cache.set(self.cache_key, response)
+            db = 'ORM'
+        serialized_data = self.serializer_class(response, many=True).data
         response_data = {
-            "count":count,
-            "data":serialized_data,
+            'db': db,
+            'count': response.count(),
+            'data': serialized_data
         }
         return create_response(response_data, SUCCESSFUL, 200)
 

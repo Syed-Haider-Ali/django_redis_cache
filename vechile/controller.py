@@ -7,31 +7,13 @@ from .models import *
 from django.core.cache import cache
 
 
-
 class MakeController(BaseAPIController):
     serializer_class = MakeSerializer
     filterset_class = MakeFilter
-
+    cache_key = "make_cache"
 
 class VechileController(BaseAPIController):
     serializer_class = VechileSerializer
     filterset_class = VechileFilter
+    cache_key = "vechile_cache"
 
-    def get(self,request):
-        response = []
-
-        if cache.get('response_key'):
-            response = cache.get('response_key')
-            db= 'redis'
-        else:
-            instances = self.serializer_class.Meta.model.objects.select_related('make').all()
-            for i in instances:
-                response.append(i.name)
-            cache.set('response_key', response)
-            db = 'ORM'
-
-        response_data = {
-            'db': db,
-            'data': response
-        }
-        return create_response(response_data, SUCCESSFUL, 200)
